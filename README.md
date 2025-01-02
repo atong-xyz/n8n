@@ -16,6 +16,10 @@ Each workflow is stored as a JSON file that you can import into your own n8n ins
    - Description: Integrate n8n and Supabase to create a workflow for interacting with file data using AI models.
    - [Watch the Video Tutorial](https://youtu.be/HHqMwp-3GMY)
 
+### 2. **Build Your Own Voice AI Agent For Custmor Reach**
+   - Description: Integrate n8n and ElevenLabs.io to create a Voice AI Agent which can handle custmor and replay there quries + take action on there quries.
+   - [Watch the Video Tutorial](https://www.youtube.com/watch?v=rUcRC6hsjR0)
+
 ---
 
 ## How to Use
