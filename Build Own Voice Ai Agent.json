@@ -1,0 +1,314 @@
+{
+  "name": "My Elda",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ce1b0f86-d1c9-489f-8791-e052f861c5c6",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        -240
+      ],
+      "id": "d770d8b7-7277-4c2e-9383-53c7eb04422a",
+      "name": "Webhook",
+      "webhookId": "ce1b0f86-d1c9-489f-8791-e052f861c5c6"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        760,
+        -240
+      ],
+      "id": "158bb0f4-7314-4735-9d49-0b4ea75aef93",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -20
+      ],
+      "id": "9e245f5c-b4f6-4f19-9dfd-48045a342327",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "HTcHoPE9qQ8PacoC",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.headers['x-forwarded-for'] }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        100,
+        120
+      ],
+      "id": "73ad3bba-f8da-43ff-934a-c366ed510f2c",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "nntestai163@gmail.com",
+          "mode": "list",
+          "cachedResultName": "nntestai163@gmail.com"
+        },
+        "timeMin": "={{ $fromAI('start_time') }}",
+        "timeMax": "={{ $fromAI('end_time') }}",
+        "options": {
+          "timezone": {
+            "__rl": true,
+            "value": "Asia/Kolkata",
+            "mode": "list",
+            "cachedResultName": "Asia/Kolkata"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        380,
+        -20
+      ],
+      "id": "890fb607-8a1a-4f8e-a9e7-870baa7b0be5",
+      "name": "Availability Tool",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "24pemsxluV8cqPWq",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI('user_email') }}",
+        "subject": "Appointment Details ",
+        "message": "=<h2>Dear User {{ $fromAI('user_name') }}</h2>\n<p>\nThanks for calling us we will update you as soon as possible \n</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        680,
+        -20
+      ],
+      "id": "50304b3a-ca0a-4fd8-b1d3-5f08d13e875a",
+      "name": "Gmail",
+      "webhookId": "0774a1b2-e965-4948-8bb6-9df1cf29dbb1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2iP9eIjWDbXmVerl",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "nntestai163@gmail.com",
+          "mode": "list",
+          "cachedResultName": "nntestai163@gmail.com"
+        },
+        "start": "= {{ $fromAI('start_time') }}",
+        "end": "= {{ $fromAI('end_time') }}",
+        "useDefaultReminders": false,
+        "additionalFields": {
+          "attendees": [
+            "= {{ $fromAI('user_email') }}"
+          ],
+          "description": "this event is User request of query",
+          "location": "= {{ $fromAI('user_location') }}",
+          "summary": "= {{ $fromAI('user_purpuse') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        540,
+        -20
+      ],
+      "id": "bcdb7713-23ab-4f20-bd7a-5a6308df3970",
+      "name": "Event Creator",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "24pemsxluV8cqPWq",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "nntestai163@gmail.com",
+          "mode": "list",
+          "cachedResultName": "nntestai163@gmail.com"
+        },
+        "options": {
+          "timeMin": "={{ $fromAI('start_time') }}",
+          "timeMax": "= {{ $fromAI('end_time') }}",
+          "timeZone": {
+            "__rl": true,
+            "value": "Asia/Kolkata",
+            "mode": "list",
+            "cachedResultName": "Asia/Kolkata"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        -20
+      ],
+      "id": "b7dc097d-004e-4d2a-a0af-c7c96bafbe25",
+      "name": "event Watcher",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "24pemsxluV8cqPWq",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Role and Action:\nService Agent\n\nIf the user asks about checking availability for a physical inspection or service:\n\nUse the Availability Tool to check if there is an available slot. Remember, every booking must be made for at least one hour and office hour is just morning 9 AM to 6PM.\nIf no booking is available for the desired slot:\n\nUse the Event Watcher Tool to check if there are available slots in the upcoming week.\nPrompt the user with the available slots.\nIf the user agrees to a slot:\n\nAsk for any additional details (if needed) and proceed to book the appointment using the Event Creator Tool.\nSend a confirmation email to the user using Gmail.\ntoday is {{ $now.format('D t') }}\nQuery:\n{{ $json.query.query }}\n\nData:\n{{ $json.body.toJsonString() }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        80,
+        -240
+      ],
+      "id": "0054ae6e-96fc-46a8-a04c-784b494e6441",
+      "name": "AI Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Availability Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Event Creator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "event Watcher": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "166ad7dc-af3b-4f3e-95ca-65b2a82f208b",
+  "meta": {
+    "instanceId": "4e3b2daf49d0786cbff97c0d576b144bd41ab5d27e9f94805fa0352d51cb1242"
+  },
+  "id": "CMklTI3Cr8jXe5xE",
+  "tags": []
+}
