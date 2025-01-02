@@ -14,7 +14,7 @@ Each workflow is stored as a JSON file that you can import into your own n8n ins
 
 ### 2. **Chat with Any File Using Supabase + n8n**
    - Description: Integrate n8n and Supabase to create a workflow for interacting with file data using AI models.
-   - [Watch the Video Tutorial](#)
+   - [Watch the Video Tutorial](https://youtu.be/HHqMwp-3GMY)
 
 ---
 
