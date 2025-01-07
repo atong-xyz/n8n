@@ -99,7 +99,7 @@ If you are unable to connect to your n8n workspace, proceed with the next steps.
 Install OpenSSL and generate SSL certificates:
 
 ```bash
-sudo apt install openssl -y
+sudo yum install openssl -y
 sudo mkdir /etc/n8n-certs
 sudo openssl req -x509 -newkey rsa:4096 -keyout /etc/n8n-certs/n8n-key.pem -out /etc/n8n-certs/n8n-cert.pem -days 365 -nodes
 ```
