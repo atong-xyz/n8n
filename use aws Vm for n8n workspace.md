@@ -50,6 +50,8 @@ By default, it will run on port `5678`. Access it in your browser at:
 http://<Instance_Public_IP>:5678
 ```
 
+## Go to Aws instance security group and add the inbound rule for port 5678.
+
 ## Step 5: Set Up n8n as a Background Service
 Running n8n in the foreground is not ideal. Configure it as a background service:
 
