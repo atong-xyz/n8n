@@ -71,7 +71,7 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/n8n
 Restart=always
-User=<your-user>
+User=<your-user> i.e: ec2-user (from AWS)
 Environment=HOME=/home/<your-user>
 Environment=DATA_FOLDER=/home/<your-user>/.n8n
 
