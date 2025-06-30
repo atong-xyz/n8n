@@ -79,6 +79,40 @@ Environment=DATA_FOLDER=/home/<your-user>/.n8n
 WantedBy=multi-user.target
 ```
 
+Alternatively create bash file with the following:
+
+```bash
+#!/bin/bash
+export NVM_DIR="/home/ec2-user/.nvm"
+source "$NVM_DIR/nvm.sh"
+n8n
+```
+
+then
+
+```bash
+chmod +x /home/ec2-user/start-n8n.sh
+```
+
+and use the following for n8n.service
+
+```ini
+[Unit]
+Description=n8n workflow automation tool
+After=network.target
+
+[Service]
+ExecStart=/home/ec2-user/start-n8n.sh
+Restart=always
+User=ec2-user
+Environment=HOME=/home/ec2-user
+Environment=DATA_FOLDER=/home/ec2-user/.n8n
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
 ### Enable and Start the Service
 
 ```bash
