@@ -168,25 +168,28 @@ Replace the content with the following, updating `your_public_ip_address`, `your
 
 ```ini
 [Unit]
-Description=n8n service
+Description=n8n workflow automation tool
 After=network.target
 
 [Service]
 Type=simple
+ExecStart=/home/ec2-user/start-n8n.sh
+Restart=always
 User=ec2-user
-ExecStart=/usr/bin/npm run start
-Environment=N8N_HOST=your_public_ip_address
+Environment=HOME=/home/ec2-user
+Environment=DATA_FOLDER=/home/ec2-user/.n8n
+Environment=N8N_HOST=<AWS_PUBLIC_IP_ADDRESS>
 Environment=N8N_PORT=5678
 Environment=N8N_PROTOCOL=https
 Environment=N8N_BASIC_AUTH_ACTIVE=true
-Environment=N8N_BASIC_AUTH_USER=your_username
-Environment=N8N_BASIC_AUTH_PASSWORD=your_password
+Environment=N8N_BASIC_AUTH_USER=<SOME_USERNAME>
+Environment=N8N_BASIC_AUTH_PASSWORD=<SOME_PASSWORD>
 Environment=N8N_SSL_KEY=/etc/n8n-certs/n8n-key.pem
 Environment=N8N_SSL_CERT=/etc/n8n-certs/n8n-cert.pem
-Restart=always
 
 [Install]
 WantedBy=multi-user.target
+
 ```
 
 ### Restart the Service
