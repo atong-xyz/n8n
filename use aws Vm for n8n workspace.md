@@ -178,7 +178,7 @@ Restart=always
 User=ec2-user
 Environment=HOME=/home/ec2-user
 Environment=DATA_FOLDER=/home/ec2-user/.n8n
-Environment=N8N_HOST=<AWS_PUBLIC_IP_ADDRESS>
+Environment=N8N_HOST=<AWS_PUBLIC_DNS> eg. ec2-123-456-789-10.us-east-amazonaws.com
 Environment=N8N_PORT=5678
 Environment=N8N_PROTOCOL=https
 Environment=N8N_BASIC_AUTH_ACTIVE=true
